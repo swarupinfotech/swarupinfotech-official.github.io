@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+    
+    {% load static %}
+
+     {% block body %}
+      
+
+
+    <div class="py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <span>Blog</span>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section bg-white">
+      <div class="container">
+        <div class="row">
+
+          {% for post in posts %}
+            
+         
+          <div class="col-lg-4 mb-4">
+            <div class="entry2">
+              <a href="{{post.slug}}"><img src="{{post.image.url}}" alt="{{post.title}}" class="img-fluid rounded"></a>
+              <div class="excerpt">
+              <span class="post-category text-white bg-secondary mb-3">{{post.category.title}}</span>
+
+              <h2><a href="{{post.slug}}">{{post.title | safe}}</a></h2>
+              <div class="post-meta align-items-center text-left clearfix">
+                <span>&nbsp;-&nbsp; {{post.date | safe}}</span>
+              </div>
+              
+                <p>{{post.text | safe | truncatechars:100}}</p>
+                <p><a href="{{post.slug | safe}}">Read More</a></p>
+              </div>
+            </div>
+          </div>
+          
+          {% endfor %}
+
+
+
+
+        </div>
+
+    </div>
+  </div>
+    
+    
+      {% endblock body %}

@@ -1,0 +1,132 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+    
+
+    
+    <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('{{post.image.url}}');">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              <span class="post-category text-white bg-success mb-3">{{post.category.title}}</span>
+              <h1 class="mb-4"><a href="#">{{post.title | safe}}</a></h1>
+              <div class="post-meta align-items-center text-center">
+                <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="{{post.image.url}}" alt="Image" class="img-fluid"></figure>
+
+                <span>&nbsp;-&nbsp;{{post.date | safe}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="site-section py-lg">
+      <div class="container">
+        
+        <div class="row blog-entries element-animate">
+
+          <div class="col-md-12 col-lg-8 main-content">
+            
+            <div class="post-content-body">
+              <p>{{post.text |safe }}</p>
+           
+            
+            </div>
+
+            <div class="pt-5">
+              <h3 class="mb-5">Comments</h3>
+              <ul class="comment-list">
+                <li class="comment">
+                  
+
+                  {% for com in comment %}
+                    
+                
+                  <div class="comment-body">
+
+                    <h3>{{com.name | safe}}</h3>
+        
+                    <p>{{com.message|safe}}</p>
+      
+                  </div>
+
+                    {% endfor %}
+
+
+
+                </li>
+
+                
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+               
+              </ul>
+              <!-- END comment-list -->
+              
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+
+                <form action="/single/" method="post" class="p-5 bg-light">
+                 {% csrf_token %}
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" name="name" class="form-control" id="name" required="">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" name="email" class="form-control" id="email" required="">
+                  </div>
+                  <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="text" name= "website" class="form-control" id="website" required="">
+                  </div>
+
+     
+                    <input type="hidden" name= "postsno" class="form-control" id="website" value="{{post.sno}}" required="">
+            
+
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" required=""></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                  </div>
+
+
+
+                </form>
+
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- END main-content -->
+
+          <div class="col-md-12 col-lg-4 sidebar">
+            <div class="sidebar-box search-form-wrap">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon fa fa-search"></span>
+                  <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div>
+           
+            
+        </div>
+      </div>
+    </section>
+
+
+
+    
+    {% endblock body %}
